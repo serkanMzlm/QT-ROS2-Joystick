@@ -20,4 +20,4 @@ The joystick interface is developed using Qt. This interface communicates with R
     - ROS2 launches for Linux should be initiated via the command prompt (cmd).
 
 
-[video.webm](https://github.com/serkanMzlm/QT-ROS2-Joystick/assets/74418302/a009697f-1a88-4636-97db-a08d4ae9ec75)
+[qt_joy.webm](https://github.com/serkanMzlm/QT-ROS2-Joystick/assets/74418302/1093c2bf-77d2-40e3-9b08-3631efae21ea)
