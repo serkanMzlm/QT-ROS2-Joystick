@@ -1,13 +1,10 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
-//import JoyLibrary 1.0
-
 
 Window {
 
     maximumHeight: 300
     maximumWidth:  600
-
     minimumHeight: maximumHeight
     minimumWidth:  maximumWidth
     visible: true
@@ -21,8 +18,7 @@ Window {
         id: udrl
         x: 50
         y: 150
-
-        width:  132
+        width: 132
         height: 112
 
         Image {
@@ -32,9 +28,9 @@ Window {
             source: "/images/up.png"
             MouseArea{
                 anchors.fill: parent
-                onPressed:{ upper.opacity = 0.5
+                onPressed:{
+                    upper.opacity = 0.5
                     _rosNode.buttonCallback(0)
-
                 }
                 onReleased: upper.opacity  = 1.0
             }
@@ -47,13 +43,14 @@ Window {
             source: "/images/down.png"
             MouseArea{
                 anchors.fill: parent
-                onPressed:{  down.opacity  = 0.5
+                onPressed:{
+                    down.opacity  = 0.5
                     _rosNode.buttonCallback(1)
                 }
                 onReleased: down.opacity  = 1.0
             }
-
         }
+
         Image {
             id: left
             x:  0
@@ -61,14 +58,14 @@ Window {
             source: "/images/left.png"
             MouseArea{
                 anchors.fill: parent
-                onPressed:  {left.opacity = 0.5
+                onPressed:  {
+                    left.opacity = 0.5
                     _rosNode.buttonCallback(2)
                 }
                 onReleased: left.opacity = 1.0
-
-
             }
         }
+
         Image {
             id: right
             x:  100
@@ -77,14 +74,14 @@ Window {
             source: "/images/right.png"
             MouseArea{
                 anchors.fill: parent
-                onPressed: {right.opacity  = 0.5
+                onPressed: {
+                    right.opacity  = 0.5
                     _rosNode.buttonCallback(3)
                 }
                 onReleased: right.opacity  = 1.0
             }
         }
     }
-
 
     Rectangle{
         id: xrtc
@@ -93,6 +90,7 @@ Window {
 
         width:  132
         height: 112
+
         Image {
             id: x_icon
             x:  50
@@ -100,12 +98,14 @@ Window {
             source: "/images/x.png"
             MouseArea{
                 anchors.fill: parent
-                onPressed: {x_icon.scale  = 1.3
+                onPressed: {
+                    x_icon.scale  = 1.3
                     _rosNode.buttonCallback(6)
                 }
                 onReleased: x_icon.scale = 1.0
             }
         }
+
         Image {
             id: rec_icon
             x:  0
@@ -113,7 +113,8 @@ Window {
             source: "/images/rectangle.png"
             MouseArea{
                 anchors.fill: parent
-                onPressed: {rec_icon.scale  = 1.3
+                onPressed: {
+                    rec_icon.scale  = 1.3
                     _rosNode.buttonCallback(5)
                 }
                 onReleased: rec_icon.scale = 1.0
@@ -126,12 +127,12 @@ Window {
             source: "/images/triangle.png"
             MouseArea{
                 anchors.fill: parent
-                onPressed:   {tri_icon.scale = 1.3
+                onPressed:   {
+                    tri_icon.scale = 1.3
                     _rosNode.buttonCallback(7)
                 }
-                onReleased:  tri_icon.scale = 1.0
+                onReleased: tri_icon.scale = 1.0
             }
-
 
         }
         Image {
@@ -140,17 +141,14 @@ Window {
             y:40
             opacity: 1.0
             source: "/images/circle.png"
-
-
             MouseArea{
                 anchors.fill: parent
-                onPressed:    {cir_icon.scale  = 1.3
+                onPressed: {
+                    cir_icon.scale  = 1.3
                     _rosNode.buttonCallback(4)
                 }
-                onReleased:   cir_icon.scale = 1.0
+                onReleased: cir_icon.scale = 1.0
             }
-
-
         }
     }
 
@@ -167,9 +165,7 @@ Window {
                 rect.x    = value_x
                 rect.y    = value_y
                 rec.scale = 1.3
-
-                if(value)
-                {
+                if(value) {
                     rec.source =  "/images/recycle.png"
                     value = false
                     udrl.x = 50
@@ -177,11 +173,7 @@ Window {
                     xrtc.x = 420
                     xrtc.y = 150
                     _rosNode.buttonCallback(8)
-
-
-                }
-                else
-                {
+                } else {
                     rec.source = "/images/recycle2.png"
                     value = true
                     udrl.x = 420
@@ -190,11 +182,9 @@ Window {
                     xrtc.y = 150
                     _rosNode.buttonCallback(9)
                 }
-
             }
             onReleased: rec.scale = 1.0
         }
-
     }
 
     Rectangle {
@@ -212,27 +202,25 @@ Window {
             height: 25
             color: "#59BDB7"
             radius: width*0.5
-
         }
+
         MouseArea {
-               anchors.fill: parent
-               onPositionChanged:
-               {
-                   rect.x = mouseX - rect.width / 2;
-                   rect.y = mouseY - rect.height / 2
-//                   _ballTrac.setBall(rect.x, rect.y)
-//                   _ballTrac.getBall()
-                   _rosNode.ballStateCallback(rect.x, rect.y)
-               }
+           anchors.fill: parent
+           onPositionChanged:
+           {
+               rect.x = mouseX - rect.width / 2;
+               rect.y = mouseY - rect.height / 2
+               _rosNode.ballStateCallback(rect.x, rect.y)
            }
+        }
     }
 
-        Text{
-            id: name
-            x:275; y:0
-            text: _rosNode.name
-            font.family: "Arial"
-            font.bold: true
-            font.pointSize: 14
-        }
+    Text{
+        id: name
+        x:275; y:0
+        text: _rosNode.name
+        font.family: "Arial"
+        font.bold: true
+        font.pointSize: 14
+    }
 }

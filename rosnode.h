@@ -11,31 +11,28 @@
 using stringMsg = example_interfaces::msg::String;
 using twistMsg  = geometry_msgs::msg::Twist;
 
+typedef struct{
+    rclcpp::Publisher<stringMsg>::SharedPtr button;
+    rclcpp::Publisher<twistMsg>::SharedPtr ball;
+}Pub_t;
+
 class RosNode : public QObject, public rclcpp::Node
 {
     Q_OBJECT
-    Q_PROPERTY(QString name READ getName WRITE setName NOTIFY nameChanged)
 public:
     explicit RosNode(QObject *parent = nullptr);
     ~RosNode();
-    QString getName() const;
-    void setName(const QString &newName);
-    void setJoyName(const stringMsg::SharedPtr msg);
     Q_INVOKABLE void buttonCallback(int number);
     Q_INVOKABLE void ballStateCallback(int x, int y);
 
-signals:
-    void nameChanged();
-
 private:
-    rclcpp::Subscription<stringMsg>::SharedPtr  joy_name_sub;
-    rclcpp::Publisher<stringMsg>::SharedPtr button_pub;
-    rclcpp::Publisher<twistMsg>::SharedPtr ball_pub;
-
+    Pub_t pub;
     void rosSpin();
     std::thread spin_thread;
-    std::string joy_name;
-    QString name;
+    std::string ros_message[10] = {"up", "down", "left", "right",
+                                   "circle", "rectangle", "x", "triangle",
+                                   "right hand mode", "left hand mode"};
+
 };
 
 #endif // ROSNODE_H
